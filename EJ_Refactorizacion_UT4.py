@@ -1,19 +1,13 @@
-from abc import ABC, abstractmethod
+
 
 # Clase abstracta para representar una receta
-class Receta(ABC):
+class Receta():
     def __init__(self, nombre, ingredientes, pasos):
         self.nombre = nombre  # nombre
         self.ingredientes = ingredientes  # ingredientes
         self.pasos = pasos  # pasos
 
-    @abstractmethod
-    def mostrar(self):
-        pass
-
-
-# Clase para recetas vegetarianas
-class Vegetarianas(Receta):
+    
     def mostrar(self):
         print(f"Receta vegetariana: {self.nombre}")
         print("Ingredientes:")
@@ -24,17 +18,18 @@ class Vegetarianas(Receta):
             print(f"{pasos}")
 
 
+# Clase para recetas vegetarianas
+class Vegetarianas(Receta):
+    def __init__(self, nombre, ingredientes, pasos):
+        super().__init__(nombre, ingredientes, pasos)
+        
+
+
 # Clase para recetas no vegetarianas
 class NoVegetarianas(Receta):
-    def mostrar(self):
-        print(f"Receta NO vegetariana: {self.nombre}")
-        print("Ingredientes:")
-        for ingredientes in self.ingredientes:
-            print(f"- {ingredientes}")
-        print("Pasos:")
-        for paso in self.pasos:
-            print(f"{paso}")
-
+    def __init__(self, nombre, ingredientes, pasos):
+        super().__init__(nombre, ingredientes, pasos)
+        
 
 # Clase con utilidades del restaurante
 class Utilidades:
