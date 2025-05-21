@@ -43,26 +43,47 @@ class Utilidades:
     def mostrar_lista_ingredientes(lista):
         for list in lista:
             print(f"* {list}")
+    
+
+def crear_receta():
+    nombre = str(input("Dime el nombre de tu receta: "))
+    ingredientes = []
+    print("Introduce todos los ingredientes: (escribe fin para terminar)")
+    while True:
+        ingrediente = str(input("Dime un ingrediente: "))
+        if ingrediente.lower() == "fin":
+            break
+        ingredientes.append(ingrediente)
+    
+    pasos =[]
+    print("Introduce los pasos necesarios para hacerlo: (escribe fin para terminar)")
+    
+    while True:
+        paso = str(input("Dime los pasos que tiene: "))
+        if paso.lower() == "fin":
+            break
+        pasos.append(paso)
+    return nombre, ingredientes, pasos
+
+    
 
 # Función principal
 def principal():
-    vegetariana = Vegetarianas("Ensalada César", ["lechuga", "queso", "pan tostado", "salsa"], ["Lavar", "Mezclar", "Servir"])
-    no_vegetariana = NoVegetarianas("Pollo al horno", ["pollo", "patatas", "ajo", "aceite"], ["Preparar", "Hornear", "Servir"])
-    
-    # Duplicación de código al imprimir
-    print("== Mostrar recetas ==")
-    Utilidades.imprimir_receta(vegetariana)
-    Utilidades.imprimir_receta(no_vegetariana)
+    nombre, ingredientes, pasos = crear_receta()
 
-    # Código duplicado para mostrar ingredientes
-    print("Ingredientes de Ensalada César:")
-    for ingredientes in vegetariana.ingredientes:
-        print(f"* {ingredientes}")
-    
-    print("Ingredientes de Pollo al horno:")
-    for ingredientes in no_vegetariana.ingredientes:
-        print(f"* {ingredientes}")
+    tipo = str(input("Dime que tipo de receta quieres crear Vegetariana /Carnivora "))
 
+    if tipo.lower() == "vegetariana":
+        print("Receta Creada 1 (Vegetariana)")
+        receta1 = Vegetarianas(nombre,ingredientes,pasos)
+        Utilidades.imprimir_receta(receta1)
+    elif tipo.lower() == "carnivora":
+        print("Receta Creada 2 (Carnivora)")
+        receta2 = NoVegetarianas(nombre,ingredientes,pasos)
+        Utilidades.imprimir_receta(receta2)
+    else:
+        print("El tipo de receta no es el correcto")
+    
 
 # Ejecutar el programa
 if __name__ == "__main__":
